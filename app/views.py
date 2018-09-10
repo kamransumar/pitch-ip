@@ -14,3 +14,9 @@ def index():
 
     title = 'Home - Welcome to The best Movie Review Website Online'
     return render_template('index.html', title=title)
+
+
+@app.route('/pitch', methods=['GET', 'POST'])
+@login_required
+def new_review(id):
+    pass

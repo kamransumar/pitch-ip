@@ -1,15 +1,21 @@
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from . import login_manager
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.column(db.String(255))
+    name = db.column(db.String(30))
     username = db.Column(db.String(255))
-    image = db.Column(db.String(255))
-    email = db.Column(db.String(255))
+    image = db.Column(db.String,  default='default.jpg')
+    email = db.Column(db.String(30))
     pass_secure = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref='author', lazy='dynamic')
     comments = db.relationship('Comment', backref='comment', lazy='dynamic')
@@ -37,7 +43,7 @@ class Comment(db.Model):
     ratings = db.Column(db.Integer)
     like = db.Column(db.Integer)
     dislike = db.Column(db.Integer)
-    content = db.Column(db.String)
+    content = db.Column(db.Text)
     time = db.Column(db.DateTime)
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
@@ -50,8 +56,8 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    content = db.Column(db.String)
-    comments = db.relationship('Comment', backref='comment', lazy='dynamic')
+    content = db.Column(db.Text)
+    comments_id = db.relationship('Comment', backref='comment', lazy='dynamic')
     time = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
@@ -63,6 +69,12 @@ class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     pitches = db.relationship('Pitch', backref='category', lazy='dynamic')
+    category_name = db.column(db.String(30))
 
     def __repr__(self):
         return f'Category {self.id}, {self.pitch}'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
