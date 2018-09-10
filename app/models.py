@@ -73,8 +73,3 @@ class Category(db.Model):
 
     def __repr__(self):
         return f'Category {self.id}, {self.pitch}'
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))

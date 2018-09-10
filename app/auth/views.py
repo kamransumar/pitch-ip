@@ -9,9 +9,9 @@ from .forms import LoginForm, RegistrationForm
 from . import auth
 
 
-@auth.route('/login')
-def login():
-    return render_template('auth/login.html')
+# @auth.route('/login')
+# def login():
+#     return render_template('auth/login.html')
 
 
 @auth.route('/register', methods=["GET", "POST"])
@@ -23,12 +23,12 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
-        title = "New Account"
-    return render_template('auth/register.html', registration_form=form)
+        # title = "New Account"
+    return render_template('auth/register.html', registration_form=form, title=title)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
-def logins():
+def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
