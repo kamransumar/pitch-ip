@@ -9,7 +9,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.column(db.String(30))
@@ -32,10 +32,10 @@ class User(db.Model):
         return check_password_hash(self.pass_secure, password)
 
     def __repr__(self):
-        return f'User {self.id}, {self.name}, {self.username}, {self.image}, {self.email}, {self.password}, {self.pitches}, {self.comment}'
+        return f'User {self.id}, {self.name}, {self.username}, {self.image}, {self.email}, {self.pitches}, {self.comment}'
 
 
-class Comment(db.Model):
+class Comment(db.Model, UserMixin):
     __tablename__ = 'comments'
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
@@ -51,13 +51,14 @@ class Comment(db.Model):
         return f'Comment {self.id}, {self.ratings}, {self.like}, {self.dislike}, {self.content}'
 
 
-class Pitch(db.Model):
+class Pitch(db.Model, UserMixin):
     __tablename__ = 'pitches'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     content = db.Column(db.Text)
-    comments_id = db.relationship('Comment', backref='comment', lazy='dynamic')
+    comments_id = db.relationship(
+        'Comment', backref='comments', lazy='dynamic')
     time = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
@@ -65,7 +66,7 @@ class Pitch(db.Model):
         return f'Pitch {self.id}, {self.category}, {self.title}, {self.author}, {self.content}, {self.comment}'
 
 
-class Category(db.Model):
+class Category(db.Model, UserMixin):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     pitches = db.relationship('Pitch', backref='category', lazy='dynamic')
