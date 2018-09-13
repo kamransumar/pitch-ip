@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-4">
 
-            {% if user.profile_pic_path %}
+            {% if user.image %}
             <img src="{{url_for('static',filename=user.image)}}" alt="" class="img-thumbnail">
             {%else%}
             <p>No profile picture</p>
@@ -32,7 +32,7 @@
         <div class="col-md-4">
             {% if user.image %}
 
-            <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+            <img src="{{url_for('static',filename=user.image)}}" alt="" class="img-thumbnail">
 
             {%else%}
             <p>No profile picture</p>
