@@ -1,6 +1,6 @@
 # Pitcher
 
-#### app to post your pitches, {13.09.18}
+#### app to post your pitches, 13.09.18
 
 #### By **kamran sumar**
 

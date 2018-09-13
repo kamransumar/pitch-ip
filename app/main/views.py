@@ -53,7 +53,7 @@ def update_profile(name):
     return render_template('profile/update.html', form=form)
 
 
-@main.route('/user/<uname>/update/pic', methods=['POST'])
+@main.route('/user/<name>/update/pic', methods=['POST'])
 @login_required
 def update_pic(name):
     user = User.query.filter_by(username=name).first()

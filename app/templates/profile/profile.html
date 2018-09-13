@@ -1,8 +1,9 @@
 {% extends 'base.html'%}
-{% import 'bootstrap/wtf.html' as wtf%}
+
 {% block content %}
 <div class="container">
     <div class="row">
+        <!--Display profile photo-->
         <div class="col-md-4">
 
             {% if user.image %}
@@ -19,28 +20,24 @@
             {% if user.email %}
             <p> {{user.email}}</p>
             {%else%}
-            <p> {{user.username| capitalize}} has no bio </p>
+            <p> {{user.email| capitalize}} has no user name </p>
             {% endif %}
-        </div>
-
-        <!--Display profile photo-->
-        <div class="col-md-4">
             {% if user == current_user %}
             <a href="{{url_for('main.update_profile',name=user.username)}}">Edit profile</a>
             {% endif %}
         </div>
         <div class="col-md-4">
-            {% if user.image %}
+            <!-- {% if user.image %}
 
-            <img src="{{url_for('static',filename=user.image)}}" alt="" class="img-thumbnail">
+                <img src="{{url_for('static',filename=user.image)}}" alt="" class="img-thumbnail">
 
-            {%else%}
-            <p>No profile picture</p>
+                {%else%}
+                <p>No profile picture</p>
 
-            {% endif %}
+                {% endif %} -->
 
             {% if user == current_user %}
-            <form action="{{url_for('main.update_profile',name=user.username)}}" method="post" enctype="multipart/form-data">
+            <form action="{{url_for('main.update_pic',name=user.username)}}" method="post" enctype="multipart/form-data">
 
                 <input type="file" name="photo" class="form-control" required>
                 <input type="submit">
@@ -48,5 +45,6 @@
             {% endif %}
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
