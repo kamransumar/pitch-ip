@@ -7,11 +7,11 @@ from flask import Blueprint
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_mail import Mail
 
-main = Blueprint('main', __name__)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
+
 
 # bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -24,19 +24,20 @@ mail = Mail()
 def create_app(config_name):
     app = Flask(__name__)
     # ...
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint, url_prefix='/authenticate')
+    app.config.from_object(config_options[config_name])
+
+    # Setting up configuration
+
+    bootstrap.init_app(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+    # configure UploadSetconfigure_uploads(app, photos)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    # Setting up configuration
-    app.config.from_object(config_options[config_name])
-    bootstrap.init_app(app)
-    db.init_app(app)
-    login_manager.init_app(app)
-    # configure UploadSet
-    configure_uploads(app, photos)
-    mail.init_app(app)
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app

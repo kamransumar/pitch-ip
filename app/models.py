@@ -47,6 +47,15 @@ class Comment(db.Model, UserMixin):
     time = db.Column(db.DateTime)
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls, id):
+        comments = Comment.query.filter_by(comment_id=id).all()
+        return comments
+
     def __repr__(self):
         return f'Comment {self.id}, {self.ratings}, {self.like}, {self.dislike}, {self.content}'
 
@@ -62,14 +71,14 @@ class Pitch(db.Model, UserMixin):
     time = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
-    def save_comment(self):
+    def save_pitch(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
     def get_pitches(cls, id):
-        pitches = Pitch.query.filter_by(pitch_id=id).all()
-        return pitches
+        pitch = Pitch.query.filter_by(pitch_id=id).all()
+        return pitch
 
     def __repr__(self):
         return f'Pitch {self.id}, {self.category}, {self.title}, {self.author}, {self.content}, {self.comment}'
