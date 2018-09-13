@@ -1,3 +1,3 @@
-export MAIL_USERNAME=kemrenfemur23@gmail.com
-export MAIL_PASSWORD=<viper>
+export MAIL_USERNAME = moringamelissa254@gmail.com
+export MAIL_PASSWORD = moringa123
 python3.7 manage.py server

@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, abort
-from flask_login import login_required
+from flask_login import login_required, current_user
 from . import main
-from ..models import User
-from .forms import UpdateProfile
+from ..models import User, get_pitches, Comment
+from .forms import *
 from .. import db, photos
 # Views
 
@@ -15,12 +15,6 @@ def index():
 
     title = 'Home - Welcome to The best Movie Review Website Online'
     return render_template('index.html', title=title)
-
-
-@main.route('/pitch', methods=['GET', 'POST'])
-@login_required
-def new_review(id):
-    pass
 
 
 @main.route('/user/<name>')
@@ -63,3 +57,24 @@ def update_pic(name):
         user.image = path
         db.session.commit()
     return redirect(url_for('main.profile', name=name))
+
+
+@main.route('/pitch/comment/new/<int:id>', methods=['GET', 'POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+    pitch = get_pitches(id)
+    if form.validate_on_submit():
+
+        comment = form.review.data
+
+        # Updated review instance
+        new_comment = Comment(
+            pitch_id=pitch.id, comment_content=comment, user=current_user)
+
+        # save review method
+        new_comment.save_comment()
+        return redirect(url_for('.pitch', id=pitch.id))
+
+    title = f'{pitch.title} comment'
+    return render_template('new_review.html', title=title, comment_form=form, pitch=pitch)

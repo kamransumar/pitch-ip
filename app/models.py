@@ -62,6 +62,15 @@ class Pitch(db.Model, UserMixin):
     time = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_pitches(cls, id):
+        pitches = Pitch.query.filter_by(pitch_id=id).all()
+        return pitches
+
     def __repr__(self):
         return f'Pitch {self.id}, {self.category}, {self.title}, {self.author}, {self.content}, {self.comment}'
 
