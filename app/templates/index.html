@@ -3,10 +3,14 @@
 <html>
 
 <body>
-    <h1>hello sophia</h1>
+
+    <button type="button"><a href="/pitch"> Add Pitch</a></button>
+    {% for pitch in pitches %}
+    {{pitch.title}}
+    {{pitch.content}}
 </body>
 
 </html>
 
-
+{% endfor%}
 {% endblock%}

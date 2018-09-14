@@ -14,7 +14,9 @@ def index():
     '''
 
     title = 'Home - Welcome to The best Movie Review Website Online'
-    return render_template('index.html', title=title)
+    pitches = Pitch.query.all()
+
+    return render_template('index.html', title=title, pitches=pitches)
 
 
 @main.route('/user/<name>')
