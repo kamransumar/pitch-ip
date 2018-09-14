@@ -18,9 +18,9 @@ class Config:
     SUBJECT_PREFIX = 'pitches'
     SENDER_EMAIL = 'kemrenfemur23@gmail.com'
 
-    @staticmethod
-    def init_app(app):
-        pass
+    # @staticmethod
+    # def init_app(app):
+    #     pass
 
 
 class ProdConfig(Config):
@@ -32,9 +32,9 @@ class ProdConfig(Config):
     '''
     # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macuser:1234@localhost/pitchesdb'
     # SECRET_KEY = 'asdf78tuegfjhdgfasfu'
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("HEROKU_POSTGRESQL_PURPLE_URL")
 
-    pass
+    # pass
 
 
 class DevConfig(Config):
