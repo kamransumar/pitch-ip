@@ -32,6 +32,7 @@ class ProdConfig(Config):
     '''
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macuser:1234@localhost/pitchesdb'
     SECRET_KEY = 'asdf78tuegfjhdgfasfu'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
     pass
 
@@ -54,7 +55,3 @@ config_options = {
     'production': ProdConfig
 
 }
-
-
-class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
