@@ -30,9 +30,9 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macuser:1234@localhost/pitchesdb'
-    SECRET_KEY = 'asdf78tuegfjhdgfasfu'
-    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macuser:1234@localhost/pitchesdb'
+    # SECRET_KEY = 'asdf78tuegfjhdgfasfu'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
     pass
 
