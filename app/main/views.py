@@ -69,10 +69,11 @@ def new_pitch():
         title = form.title.data
         # Updated review instance
         new_pitch = Pitch(
-            content=content, title=title, user=current_user.id)
-
+            content=content, title=title)
+        db.session.add(new_pitch)
+        db.session.commit()
         # save review method
-        new_pitch.save_pitch()
+        # new_pitch.save_pitch()
         # return redirect(url_for('.pitch', id=pitch.id))
 
     return render_template('pitch.html', pitch_form=form)
