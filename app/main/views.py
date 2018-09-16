@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, abort
 from flask_login import login_required, current_user
 from . import main
-from ..models import User, Pitch
+from ..models import User, Pitch, Comment
 from .forms import *
 from .. import db, photos
 # Views
@@ -62,7 +62,7 @@ def update_pic(name):
 
 
 @main.route('/pitch/', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
@@ -80,21 +80,22 @@ def new_pitch():
 
     return render_template('pitch.html', pitch_form=form)
 
-# @main.route('/pitch/comment/new/<int:id>', methods=['GET', 'POST'])
+
+# @main.route('//comment/', methods=['GET', 'POST'])
 # @login_required
-# def new_comment(id):
+# def new_comment():
 #     form = CommentForm()
-#     pitch = get_pitches(id)
 #     if form.validate_on_submit():
 
-#         comment = form.review.data
-
+#         content = form.content.data
+#         title = form.title.data
 #         # Updated review instance
 #         new_comment = Comment(
-#             pitch_id=pitch.id, comment_content=comment, user=current_user)
-
+#             content=content)
+#         db.session.add(new_comment)
+#         db.session.commit()
 #         # save review method
-#         new_comment.save_comment()
-#         return redirect(url_for('.pitch', id=pitch.id))
+#         # new_pitch.save_pitch()
+#         # return redirect(url_for('.pitch', id=pitch.id))
 
-#     return render_template('new_review.html', comment_form=form, pitch=pitch)
+#     return render_template('pitch.html', comment_form=form)

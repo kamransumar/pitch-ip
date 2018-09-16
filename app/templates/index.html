@@ -7,22 +7,19 @@
     <button type="button"><a href="/pitch"> Add Pitch</a></button>
     <div class="card-columns">
 
-        {% for pitch in pitches %}
-        <div class="card border-secondary">
-            <div class="card-header">
-                <h5>{{pitch.title}}</h5>
-            </div>
-
-
-            <div class="card-body text-secondary">
-                <!--<h5 class="card-title">Secondary card title</h5>-->
-                <p class="card-text">{{pitch.content}}</p>
+        {% for pitch in pitches%}
+        <div class="container">
+            <h4></h4>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{pitch.title}}</h4>
+                    <p class="card-text">{{pitch.content}}</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
             </div>
         </div>
     </div>
-
-    {{pitch.title}}
-    {{pitch.content}}
 </body>
 
 </html>
