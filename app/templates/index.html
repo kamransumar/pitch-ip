@@ -10,18 +10,19 @@
 </head>
 
 <body>
-    <div class="jumbotron">
-        <button type="button" class="text-center btn-warning button1"><a href="/pitch"> Add Pitch</a></button>
+    <div class="jumbotron text-center">
+        <button type="button" class="text-center btn-warning" id="button1"><a href="/pitch"> Add Pitch</a></button>
     </div>
-    <div class="card-columns">
-
-        {% for pitch in pitches%}
-        <div class="container">
-            <h4></h4>
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">{{pitch.title}}</h4>
-                    <p class="card-text">{{pitch.content}}</p>
+    {% for pitch in pitches%}
+    <div class="container">
+        <div class="jumbotron">
+            <div class="card-columns">
+                <h4></h4>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{pitch.title}}</h4>
+                        <p class="card-text"><strong>Time posted:</strong>>{{pitch.time}}<br><strong>Your pitch:</strong>{{pitch.content}}</p>
+                    </div>
                 </div>
             </div>
         </div>
