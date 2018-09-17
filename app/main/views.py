@@ -114,3 +114,26 @@ def pitch_list():
     pitches = Pitch.query.all()
 
     return render_template('pitches.html', pitches=pitches)
+
+
+@main.route('/onepitch/<int:id>')
+def one_pitch(id):
+
+    pitch = Pitch.query.filter_by(id=id).first()
+    form = CommentForm()
+    pitch = Pitch.query.filter_by(id=id).first()
+
+    if form.validate_on_submit():
+        title = form.title.data
+        comment_form = form.comment.data
+
+        # comment instance
+        new_comment = Comment(
+            pitch_id=pitch.id, post_comment=comment_form, title=title, user=current_user)
+
+        # save comment
+        new_comment.save_comment()
+        db.session.add(new_comment)
+        db.session.commit()
+
+    return render_template('viewpitch.html', pitch=pitch, id=id, comment_form=form)
