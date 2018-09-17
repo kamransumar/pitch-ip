@@ -81,21 +81,27 @@ def new_pitch():
     return render_template('pitch.html', pitch_form=form)
 
 
-# @main.route('//comment/', methods=['GET', 'POST'])
-# @login_required
-# def new_comment():
-#     form = CommentForm()
-#     if form.validate_on_submit():
+@main.route('/pitch/comment/new/<int:id>', methods=['GET', 'POST'])
+@login_required
+def new_comment(id):
+    '''
+    view category that returns a form to create a new comment
+    '''
+    form = CommentForm()
+    pitch = Pitch.query.filter_by(id=id).first()
 
-#         content = form.content.data
-#         title = form.title.data
-#         # Updated review instance
-#         new_comment = Comment(
-#             content=content)
-#         db.session.add(new_comment)
-#         db.session.commit()
-#         # save review method
-#         # new_pitch.save_pitch()
-#         # return redirect(url_for('.pitch', id=pitch.id))
+    if form.validate_on_submit():
+        title = form.title.data
+        comment = form.comment.data
 
-#     return render_template('pitch.html', comment_form=form)
+        # comment instance
+        new_comment = Comment(
+            pitch_id=pitch.id, post_comment=comment, title=title, user=current_user)
+
+        # save comment
+        new_comment.save_comment()
+
+        return redirect(url_for('.pitches', id=pitch.id))
+
+    title = f'{pitch.title} comment'
+    return render_template('newcomment.html', title=title, comment_form=form, pitch=pitch, )

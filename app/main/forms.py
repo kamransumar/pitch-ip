@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 # from wtforms.validators import Required, Email, EqualTo
 from ..models import User
 from wtforms import ValidationError
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 
 
 class UpdateProfile(FlaskForm):
@@ -12,9 +12,13 @@ class UpdateProfile(FlaskForm):
 
 
 class PitchForm(FlaskForm):
-    title = TextAreaField('enter title')
-    content = TextAreaField('type your pitch')
-
+    title = StringField('Pitch title')
+    category_id = SelectField('Pitch Category', choices=[('product', 'product'),
+                                                         ('service', 'service'),
+                                                         ('promotion',
+                                                          'promotion'),
+                                                         ('interview', 'interview')])
+    content = TextAreaField('pitch your pitch')
     submit = SubmitField('Submit')
 
 

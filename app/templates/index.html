@@ -2,9 +2,17 @@
 <!DOCTYPE html>
 <html>
 
-<body>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
 
-    <button type="button"><a href="/pitch"> Add Pitch</a></button>
+<body>
+    <div class="jumbotron">
+        <button type="button" class="text-center btn-warning button1"><a href="/pitch"> Add Pitch</a></button>
+    </div>
     <div class="card-columns">
 
         {% for pitch in pitches%}
@@ -14,8 +22,6 @@
                 <div class="card-body">
                     <h4 class="card-title">{{pitch.title}}</h4>
                     <p class="card-text">{{pitch.content}}</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
         </div>
