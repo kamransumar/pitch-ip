@@ -79,7 +79,7 @@ def new_pitch():
         # new_pitch.save_pitch()
         # return redirect(url_for('.pitch', id=pitch.id))
 
-    return render_template('pitch.html', pitch_form=form)
+    return render_template('pitches.html', pitch_form=form)
 
 
 @main.route('/pitch/comment/new/<int:id>', methods=['GET', 'POST'])
