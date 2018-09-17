@@ -3,15 +3,11 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="jumbotron text-center">
-        <button type="button" class="text-center btn-warning" id="button1"><a href="/pitch"> Add Pitch</a></button>
+    <div class="jumbotron text-center" id="jumbo1">
+        <button type="button" class="text-center btn btn-warning" id="button1"><a href="/pitch"> Add Pitch</a></button>
     </div>
     {% for pitch in pitches%}
     <div class="container">
@@ -19,9 +15,12 @@
             <div class="card-columns">
                 <h4></h4>
                 <div class="card">
+                    <h4 class="card-title"><strong>{{pitch.title | capitalize}}</strong></h4>
+                    <p class="card-text">category:{{pitch.category}}</p><br>
+                    <p class="card-text">Time posted:{{pitch.time}}</p><br>
                     <div class="card-body">
-                        <h4 class="card-title">{{pitch.title}}</h4>
-                        <p class="card-text"><strong>Time posted:</strong>>{{pitch.time}}<br><strong>Your pitch:</strong>{{pitch.content}}</p>
+                        <h4 class="text-center">Your pitch:</h4><br>
+                        <p>{{pitch.content}}</p>
                     </div>
                 </div>
             </div>

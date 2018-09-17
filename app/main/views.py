@@ -105,3 +105,11 @@ def new_comment(id):
 
     title = f'{pitch.title} comment'
     return render_template('newcomment.html', title=title, comment_form=form, pitch=pitch, )
+
+
+@main.route('/allpitches')
+def pitch_list():
+
+    pitches = Pitch.query.all()
+
+    return render_template('pitches.html', pitches=pitches)
