@@ -17,6 +17,8 @@ class Config:
     SUBJECT_PREFIX = 'blogs'
     SENDER_EMAIL = 'kemrenfemur23@gmail.com'
 
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macuser:1234@localhost/pitchesdb'
+
     @staticmethod
     def init_app(app):
         pass

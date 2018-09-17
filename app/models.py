@@ -53,6 +53,7 @@ class Comment(db.Model, UserMixin):
 
 class Pitch(db.Model, UserMixin):
     __tablename__ = 'pitches'
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

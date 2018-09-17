@@ -1,8 +1,8 @@
-"""category created
+"""Corrected db name
 
-Revision ID: dfb7cac598c8
+Revision ID: 9176817ab5db
 Revises: 
-Create Date: 2018-09-17 09:24:03.904764
+Create Date: 2018-09-17 15:05:08.122813
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'dfb7cac598c8'
+revision = '9176817ab5db'
 down_revision = None
 branch_labels = None
 depends_on = None
