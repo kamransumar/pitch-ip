@@ -69,9 +69,10 @@ def new_pitch():
 
         content = form.content.data
         title = form.title.data
+        category = form.category.data
         # Updated review instance
         new_pitch = Pitch(
-            content=content, title=title)
+            content=content, title=title, category=category)
         db.session.add(new_pitch)
         db.session.commit()
         # save review method

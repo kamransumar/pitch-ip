@@ -57,20 +57,10 @@ class Pitch(db.Model, UserMixin):
     title = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     content = db.Column(db.Text)
+    category = db.Column(db.String)
     comments_id = db.relationship(
         'Comment', backref='comments', lazy='dynamic')
     time = db.Column(db.DateTime)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     def __repr__(self):
         return f'Pitch {self.id}, {self.category}, {self.title}, {self.author}, {self.content}, {self.comment}'
-
-
-class Category(db.Model, UserMixin):
-    __tablename__ = 'categories'
-    id = db.Column(db.Integer, primary_key=True)
-    pitches = db.relationship('Pitch', backref='category', lazy='dynamic')
-    category_name = db.column(db.String(30))
-
-    def __repr__(self):
-        return f'Category {self.id}, {self.pitch}'

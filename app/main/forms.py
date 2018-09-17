@@ -13,12 +13,10 @@ class UpdateProfile(FlaskForm):
 
 class PitchForm(FlaskForm):
     title = StringField('Pitch title')
-    category_id = SelectField('Pitch Category', choices=[('product', 'product'),
-                                                         ('service', 'service'),
-                                                         ('promotion',
-                                                          'promotion'),
-                                                         ('interview', 'interview')])
+    category = SelectField('Pitch Category', choices=[('product', 'product'),
+                                                      ('service', 'service'),         ('promotion', 'promotion'),     ('interview', 'interview')])
     content = TextAreaField('pitch your pitch')
+
     submit = SubmitField('Submit')
 
 
