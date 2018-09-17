@@ -16,7 +16,6 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     SUBJECT_PREFIX = 'blogs'
     SENDER_EMAIL = 'kemrenfemur23@gmail.com'
-
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://macuser:1234@localhost/pitchesdb'
 
     @staticmethod
@@ -31,7 +30,6 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SECRET_KEY = 'asdf78tuegfjhdgfasfu'
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
     pass
