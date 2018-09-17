@@ -13,6 +13,8 @@
                 </div>
             </div>
             {{ wtf.quick_form(comment_form) }}
+            {%for comment in comments%}
+            <p>{{comment.content}}</p>
 
         </div>
     </div>
@@ -20,4 +22,5 @@
 </body>
 
 </html>
+{%endfor%}
 {% endblock%}
