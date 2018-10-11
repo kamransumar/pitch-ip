@@ -89,6 +89,7 @@ def new_comment(id):
     '''
     view category that returns a form to create a new comment
     '''
+
     form = CommentForm()
     pitch = Pitch.query.filter_by(id=id).first()
 
